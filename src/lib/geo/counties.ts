@@ -3,9 +3,7 @@ import axios from "axios";
 /**
  * 
  * @param {string} country - The name of the country
- * @returns {string} The CCA2 code for the country
- * 
- * @throws {Error} if the country cannot be found
+ * @returns {string | undefined} The CCA2 code for the country or undefined if country not found
  */
 const getCountryCode = async (country: string) => {
     const countryJson = await Promise.any([
@@ -26,7 +24,7 @@ const getCountryCode = async (country: string) => {
                 }
         }
     } catch (err) {
-        throw new Error("Country not found");
+        return undefined;
     }
 };
 
@@ -46,7 +44,22 @@ const getUnitsBasedOnCountry = (country: string) => {
     return 'metric';
 }
 
+/**
+ * Get the name of a country from the country code
+ * 
+ * @param countryCode the CCA2 code of a country
+ * @returns {string} the common name of the country
+ */
+const getCountryName = async (countryCode: string) => {
+    const data = await axios.get(
+        `https://restcountries.com/v3.1/alpha/${countryCode}`,
+    ).then(res => res.data);
+
+    return data[0]['name']['common'];
+}
+
 export {
     getCountryCode,
-    getUnitsBasedOnCountry
+    getUnitsBasedOnCountry,
+    getCountryName
 }
