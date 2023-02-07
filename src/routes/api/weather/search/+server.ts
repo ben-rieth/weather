@@ -19,16 +19,25 @@ export const GET: RequestHandler = async ({ url }: RequestEvent) => {
         return new Response("Units must be either imperial or metric", { status: 400 });
     }
 
-    const cityData = await getCityLocation(city, country);
+    let cityData;
+    try {
+        cityData = await getCityLocation(city, country);
+    } catch (err) {
+        return new Response("Cannot get city data from server", { status: 500 });
+    }
 
     const units : 'imperial' | 'metric' = providedUnits ?? getUnitsBasedOnCountry(cityData.countryCode);
 
-    const data = await getWeatherDataByCoords(
-        cityData.lat, 
-        cityData.lon, 
-        units, 
-        cityData.timeZone
-    );
+    try {
+        const data = await getWeatherDataByCoords(
+            cityData.lat, 
+            cityData.lon, 
+            units, 
+            cityData.timeZone
+        );
 
-    return json(data, { status: 200 })
+        return json(data, { status: 200 })
+    } catch (err) {
+        return new Response("Cannot get weather data from server", { status: 500 })
+    }
 }
