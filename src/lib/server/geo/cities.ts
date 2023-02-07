@@ -28,39 +28,47 @@ export const getCityLocation = async (city: string, country: string | undefined)
     const query = `${city},,${code ? code : ""}`;
 
     // get basic geo location data
-    const data = await axios.get(
-        'https://api.openweathermap.org/geo/1.0/direct',
-        {
-            params: {
-                q: query,
-                limit: 1,
-                appid: WEATHER_API_KEY,
+    try {
+        const data = await axios.get(
+            'https://api.openweathermap.org/geo/1.0/direct',
+            {
+                params: {
+                    q: query,
+                    limit: 1,
+                    appid: WEATHER_API_KEY,
+                }
             }
+        ).then(res => res.data);
+
+        // if no city found, return undefined
+        if (data.length === 0) {
+            throw new Error();
         }
-    ).then(res => res.data);
 
-    // if no city found, return undefined
-    if (data.length === 0) {
-        return undefined;
-    }
+        const lat = data[0]['lat'];
+        const lon = data[0]['lon'];
+        code = data[0]['country'];
 
-    const lat = data[0]['lat'];
-    const lon = data[0]['lon'];
-    code = data[0]['country'];
+        const [timeZone, countryName] = await Promise.all([
+            getTimeZone(Number(lat), Number(lon)),
+            getCountryName(code),
+        ]);
 
-    const [timeZone, countryName] = await Promise.all([
-        getTimeZone(Number(lat), Number(lon)),
-        getCountryName(code),
-    ]);
-
-    return {
-        lat,
-        lon,
-        countryName,
-        timeZone,
-        city: data[0]['name'],
-        countryCode: code,
-        state: data[0]['state']
+        return {
+            lat,
+            lon,
+            countryName,
+            timeZone,
+            city: data[0]['name'],
+            countryCode: code,
+            state: data[0]['state']
+        }
+    } catch (err) {
+        if (axios.isAxiosError(err)) {
+            throw new Error("Cannot retrieve data from server");
+        } else {
+            throw new Error("No city found");
+        }
     }
 
 }

@@ -29,22 +29,6 @@ const getCountryCode = async (country: string) => {
 };
 
 /**
- * Returns the unit system used in the specified country
- * 
- * @param {string} country - CCA2 code for the country
- * @returns {"imperial" | "metric"} The unit system of the country
- */
-const getUnitsBasedOnCountry = (country: string) => {
-    const imperialCountries = ["LR", "US", "MW"];
-
-    if (imperialCountries.includes(country)) {
-        return 'imperial';
-    }
-
-    return 'metric';
-}
-
-/**
  * Get the name of a country from the country code
  * 
  * @param countryCode the CCA2 code of a country
@@ -60,6 +44,5 @@ const getCountryName = async (countryCode: string) => {
 
 export {
     getCountryCode,
-    getUnitsBasedOnCountry,
     getCountryName
 }

@@ -22,3 +22,19 @@ export const getUnits = (units: "imperial" | "metric", type: "temp" | "speed"): 
 
     return "°F"
 }
+
+/**
+ * Returns the unit system used in the specified country
+ * 
+ * @param {string} country - CCA2 code for the country
+ * @returns {"imperial" | "metric"} The unit system of the country
+ */
+export const getUnitsBasedOnCountry = (country: string) => {
+    const imperialCountries = ["LR", "US", "MW"];
+
+    if (imperialCountries.includes(country)) {
+        return 'imperial';
+    }
+
+    return 'metric';
+}
