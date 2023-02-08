@@ -4,33 +4,44 @@ import { getUnitsBasedOnCountry } from "$lib/units";
 import { json } from "@sveltejs/kit";
 import type { RequestEvent, RequestHandler } from "../$types";
 import type { WeatherData } from "../../../../types/Weather";
+import { z } from 'zod';
+
+const schema = z.object({
+    lat: z.number({ required_error: 'Latitude is required', invalid_type_error: 'Latitude must be a number'})
+        .min(-90, "Latitude must be -90 or greater").max(90, "Latitude must be smaller than 90"),
+    lon: z.number({ required_error: 'Longitude is required', invalid_type_error: 'Longitude must be a number'})
+        .min(-180, "Longitude must be -`180 or greater").max(180, "Longitude must be smaller than 180"),
+    units: z.enum(["imperial", "metric"]).optional()
+});
 
 export const GET: RequestHandler = async ({ url }: RequestEvent) => {
-    const lat = url.searchParams.get('lat');
-    const lon = url.searchParams.get('lon');
+    const lat = Number(url.searchParams.get('lat') ?? undefined);
+    const lon = Number(url.searchParams.get('lon') ?? undefined);
     const providedUnits = url.searchParams.get('units') ?? undefined;
 
-    if (!lat || !lon) {
-        return new Response("Both latitude and longitude must be provided", {status: 400});
-    } else if (isNaN(Number(lat)) || isNaN(Number(lon))) {
-        return new Response("Latitude and longitude must be numbers", { status: 400 });
-    }
+    let params;
+    try {
+        params = schema.parse({ lat, lon, units: providedUnits });
+    } catch (err) {
+        if (err instanceof z.ZodError) {
+            return new Response(err['issues'][0]['message'], { status: 400 });
+        }
 
-    if ((providedUnits !== 'imperial' && providedUnits !== 'metric') || !providedUnits) {
-        return new Response("Units must be either imperial or metric", { status: 400 });
+        return new Response('Error', { status: 400 });
     }
 
     let geoData;
     try {
         geoData = await getGeoDataFromCoords(Number(lat), Number(lon));
     } catch(err) {
+        console.log(err);
         return new Response("Cannot get location data from provided coords", { status: 500 })
     }
 
-    const units : 'imperial' | 'metric' = providedUnits ?? getUnitsBasedOnCountry(geoData.countryCode);
+    const units : 'imperial' | 'metric' = params.units ?? getUnitsBasedOnCountry(geoData.countryCode);
 
     try {
-        const weather: WeatherData = await getWeatherDataByCoords(lat, lon, units, geoData.zone);
+        const weather: WeatherData = await getWeatherDataByCoords(params.lat, params.lon, units, geoData.zone);
         return json(weather, { status: 200 });
     } catch (err) {
         return new Response("Cannot get weather data from server", { status: 500 });
