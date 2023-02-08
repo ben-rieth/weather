@@ -14,7 +14,6 @@ const schema = z.object({
 export const GET: RequestHandler = async ({ url }: RequestEvent) => {
 
     const city = url.searchParams.get('city') ?? undefined;
-
     const country = url.searchParams.get('country') ?? undefined;
     const providedUnits = url.searchParams.get('units') ?? undefined;
 

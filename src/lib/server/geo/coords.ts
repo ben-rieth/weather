@@ -16,7 +16,7 @@ export const getGeoDataFromCoords = async (lat: number, lon: number) => {
             }
         }
     ).then(res => res.data);
-
+    
     const [timezone, countryName] = await Promise.all([
         getTimeZone(lat, lon),
         getCountryName(geoData[0]['country'])
