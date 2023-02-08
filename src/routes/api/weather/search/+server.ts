@@ -3,30 +3,40 @@ import { getWeatherDataByCoords } from "$lib/server/weather";
 import { getUnitsBasedOnCountry } from "$lib/units";
 import { json } from "@sveltejs/kit";
 import type { RequestEvent, RequestHandler } from "../$types";
+import { z } from 'zod';
+
+const schema = z.object({
+    city: z.string({ required_error: 'City must be provided' }),
+    country: z.string().optional(),
+    units: z.enum(["imperial", "metric"]).optional(),
+}) 
 
 export const GET: RequestHandler = async ({ url }: RequestEvent) => {
 
-    const city = url.searchParams.get('city');
-
-    if (!city) {
-        return new Response("City must be provided", { status: 400 });
-    }
+    const city = url.searchParams.get('city') ?? undefined;
 
     const country = url.searchParams.get('country') ?? undefined;
     const providedUnits = url.searchParams.get('units') ?? undefined;
 
-    if ((providedUnits !== 'imperial' && providedUnits !== 'metric') || !providedUnits) {
-        return new Response("Units must be either imperial or metric", { status: 400 });
+    let params;
+    try {
+        params = schema.parse({ city, country, units: providedUnits });
+    } catch (err) {
+        if (err instanceof z.ZodError) {
+            return new Response(err['issues'][0]['message'], { status: 400 });
+        }
+
+        return new Response('Error', { status: 400 });
     }
 
     let cityData;
     try {
-        cityData = await getCityLocation(city, country);
+        cityData = await getCityLocation(params.city, params.country);
     } catch (err) {
         return new Response("Cannot get city data from server", { status: 500 });
     }
 
-    const units : 'imperial' | 'metric' = providedUnits ?? getUnitsBasedOnCountry(cityData.countryCode);
+    const units : 'imperial' | 'metric' = params.units ?? getUnitsBasedOnCountry(cityData.countryCode);
 
     try {
         const data = await getWeatherDataByCoords(
