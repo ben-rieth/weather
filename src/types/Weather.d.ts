@@ -135,6 +135,8 @@ type DateAndTime = {
 }
 
 type WeatherData = DateAndTime & {
+    lat: number;
+    lon: number;
     current: CurrentData;
     forecast: ForecastData;
 }

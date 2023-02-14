@@ -109,6 +109,8 @@ export const getWeatherDataByCoords = async (
     );
 
     return {
+        lat,
+        lon,
         ...currentWeather,
         forecast: weatherForecast,
     };
