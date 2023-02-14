@@ -12,7 +12,7 @@
 
     const searchEndpoint = `${PUBLIC_URL}/api/weather/search`;
 
-    const onSubmit = async () => {
+    const searchLocation = async () => {
         status ='loading';
         try {
             const result = await axios.get(searchEndpoint, {
@@ -27,6 +27,12 @@
         } catch (err) {
             status = 'error';
         } 
+    }
+
+    const userLocation = async () => {
+        status = 'loading';
+
+        status = 'success';
     }
 
 </script>
@@ -55,13 +61,16 @@
 
     <article>
         <header>
-            <h3>Search By Location</h3>
+            <h3>Search Location</h3>
         </header>
-        <form on:submit|preventDefault={onSubmit}>
+        <form on:submit|preventDefault={searchLocation}>
             <input type='text' name='city' bind:value={city} placeholder='City*' />
             <input type='text' name='country' bind:value={country} placeholder='Country'/>
             <button type='submit'>Submit</button>
         </form>
+        <footer>
+            <button on:click={userLocation}>Search At Your Location</button>
+        </footer>
     </article>
 </main>
 
