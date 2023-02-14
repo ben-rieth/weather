@@ -1,13 +1,11 @@
 <script lang='ts'>
+    import { weatherData } from '../stores/weather';
 	import { PUBLIC_URL } from '$env/static/public';
     import axios from 'axios';
     import '@picocss/pico';
-	import type { WeatherData } from '../types/Weather';
 
     let city = '';
     let country = '';
-
-    let data: WeatherData | undefined;
     let status = 'untouched';
 
     const searchEndpoint = `${PUBLIC_URL}/api/weather/search`;
@@ -22,7 +20,7 @@
                 }
             }).then(res => res.data);
 
-            data = result;
+            $weatherData = result;
             status = 'success';
         } catch (err) {
             status = 'error';
@@ -54,7 +52,7 @@
             Search below to see the weather!
         </article>
     {:else if status === 'success'}
-        <article>{JSON.stringify(data)}</article>
+        <article>{JSON.stringify($weatherData)}</article>
     {:else if status === 'error'}
         <article>Weather could not be retrieved</article>
     {/if}
