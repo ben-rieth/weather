@@ -5,32 +5,34 @@
 
     const coordsEndpoint = `${PUBLIC_URL}/api/weather/coords`
 
+    const getPositionSuccess : PositionCallback = async (pos) => {
+        try {
+            const data = await axios.get(coordsEndpoint, {
+                params: {
+                    lat: pos.coords.latitude,
+                    lon: pos.coords.longitude,
+                }
+            }).then(res => res.data);
+
+            $weatherData = data;
+
+            $weatherStatus = 'success';
+        } catch (err) {
+            $weatherStatus = 'error';
+        }
+    };
+
+    const getPositionFailure : PositionErrorCallback = () => {
+        $weatherStatus = 'error';
+    }
+
     const userLocation = async () => {
         $weatherStatus = 'loading';
 
         navigator.geolocation.getCurrentPosition(
-            async (pos) => {
-
-                try {
-                    const data = await axios.get(coordsEndpoint, {
-                        params: {
-                            lat: pos.coords.latitude,
-                            lon: pos.coords.longitude,
-                        }
-                    }).then(res => res.data);
-
-                    $weatherData = data;
-
-                    $weatherStatus = 'success';
-                } catch (err) {
-                    $weatherStatus = 'error';
-                }
-            },
-            () => {
-                console.log("Failure to get user coords")
-                $weatherStatus = 'error';
-            }
-        )
+            getPositionSuccess,
+            getPositionFailure,
+        );
     }
 </script>
 
