@@ -41,7 +41,7 @@ export const GET: RequestHandler = async ({ url }: RequestEvent) => {
     const units : 'imperial' | 'metric' = params.units ?? getUnitsBasedOnCountry(geoData.countryCode);
 
     try {
-        const weather: WeatherData = await getWeatherDataByCoords(params.lat, params.lon, units, geoData.zone);
+        const weather: WeatherData = await getWeatherDataByCoords(params.lat, params.lon, geoData.city, geoData.countryName, units, geoData.zone);
         return json(weather, { status: 200 });
     } catch (err) {
         return new Response("Cannot get weather data from server", { status: 500 });

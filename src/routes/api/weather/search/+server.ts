@@ -41,6 +41,8 @@ export const GET: RequestHandler = async ({ url }: RequestEvent) => {
         const data = await getWeatherDataByCoords(
             cityData.lat, 
             cityData.lon, 
+            cityData.city,
+            cityData.countryName,
             units, 
             cityData.timeZone
         );

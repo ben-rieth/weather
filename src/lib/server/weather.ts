@@ -75,6 +75,8 @@ const formatCurrentWeatherData = (
 export const getWeatherDataByCoords = async (
     lat: number, 
     lon: number, 
+    city: string,
+    country: string,
     units: "imperial" | "metric", 
     timezone: string,
 ) : Promise<WeatherData> => {
@@ -111,6 +113,8 @@ export const getWeatherDataByCoords = async (
     return {
         lat,
         lon,
+        city,
+        country,
         ...currentWeather,
         forecast: weatherForecast,
     };
