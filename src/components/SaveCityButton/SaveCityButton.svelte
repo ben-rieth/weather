@@ -11,11 +11,11 @@
     }
 
     const removeCity = () => {
-        $savedCities = $savedCities.filter(saved => saved.city !== city.city && saved.country !== city.country);
+        $savedCities = $savedCities.filter(saved => `${saved.city}, ${saved.country}` !== `${city.city}, ${city.country}`);
         localStorage.setItem('saved', JSON.stringify($savedCities));
     }
 
-    $: cityIsSaved = !!$savedCities.find(saved => saved.city === city.city);
+    $: cityIsSaved = !!$savedCities.find(saved => `${saved.city}, ${saved.country}` === `${city.city}, ${city.country}`);
 </script>
 
 {#if !cityIsSaved}

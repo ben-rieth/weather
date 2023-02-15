@@ -16,6 +16,8 @@
     });
 
     const getWeather = async (city: SavedCity) => {
+        $weatherStatus = 'loading';
+
         try {
             const data = await axios.get(coordsEndpoint, {
                 params: {
