@@ -1,4 +1,5 @@
 <script lang='ts'>
+	import { getUnits } from "$lib/units";
     import { weatherData } from "../../stores/weather";
 	import DetailedWeatherData from "../DetailedWeatherData/DetailedWeatherData.svelte";
 	import Forecast from "../Forecast/Forecast.svelte";
@@ -13,18 +14,25 @@
         >
             <hgroup>
                 <h1>{$weatherData.city}, {$weatherData.country}</h1>
-                <h2>{$weatherData.current.temp}</h2>
+                <h2>{$weatherData.current.temp} {getUnits($weatherData.units, "temp")}</h2>
                 <!-- svelte-ignore a11y-missing-content -->
                 <h2></h2>
             </hgroup>    
         </header>
             
         <section>
-            <DetailedWeatherData data={$weatherData.current} />
+            <DetailedWeatherData 
+                data={$weatherData.current} 
+                units={$weatherData.units} 
+            />
         </section>
 
         {#each $weatherData.forecast as day, i}
-            <Forecast data={day} open={i === 0}/>
+            <Forecast 
+                data={day} 
+                open={i === 0} 
+                units={$weatherData.units}
+            />
         {/each}
 
         <footer>
