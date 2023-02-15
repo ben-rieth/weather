@@ -104,7 +104,7 @@ type ForecastAPIResult = {
     }
 }
 
-type ForecastData = {
+type ForecastDataWithoutAverages = {
     date: string;
     weekday: string;
     hourly: {
@@ -116,6 +116,14 @@ type ForecastData = {
         precipitation: number;
     }[];
 };
+
+type ForecastAverages = {
+    high: string;
+    low: string;
+    averageWeather: string;
+}
+
+type ForecastData = ForecastDataWithoutAverages & ForecastAverages;
 
 type CurrentData = {
     temp: string;
@@ -150,6 +158,8 @@ type WeatherData = DateAndTime & {
 export { 
     ForecastAPIResult,
     ForecastData, 
+    ForecastAverages,
+    ForecastDataWithoutAverages,
     CurrentWeatherApiResult, 
     CurrentData, 
     DateAndTime,

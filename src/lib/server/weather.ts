@@ -1,6 +1,6 @@
 import axios from "axios";
 import { WEATHER_API_KEY } from "$env/static/private";
-import type { CurrentData, CurrentWeatherApiResult, DateAndTime, ForecastAPIResult, ForecastData } from "../../types/Weather";
+import type { CurrentData, CurrentWeatherApiResult, DateAndTime, ForecastAPIResult, ForecastData, ForecastDataWithoutAverages } from "../../types/Weather";
 import { getTimeFromDate, unixToTime } from "$lib/time";
 
 const formatForecastData = (
@@ -11,7 +11,7 @@ const formatForecastData = (
     // get the starting date
     let currentDate = new Date(weatherForecast.list[0]['dt'] * 1000).toLocaleDateString([], { timeZone: timezone});
 
-    const data: ForecastData[] = [];
+    const data : ForecastDataWithoutAverages[] = [];
 
     // format the data for use on the frontend
     weatherForecast.list.forEach((timestamp) => {
@@ -45,7 +45,45 @@ const formatForecastData = (
         }
     });
 
-    return data;
+    // get average information for the day
+    const finalData = data.map(timestamp => {
+
+        let lowestTemp = timestamp.hourly[0].temp;
+        let highestTemp = timestamp.hourly[0].temp;
+
+        const weatherMap = new Map<string, number>();
+
+        for (const hour of timestamp.hourly) {
+            // see if current temp is the lowest so far
+            if (hour.temp > highestTemp) {
+                highestTemp = hour.temp;
+            } 
+            
+            // see if current temp is the lowest so far
+            if (hour.temp < lowestTemp) {
+                lowestTemp = hour.temp;
+            }
+
+            // see how many times a certain weather pattern appears
+            const currentValueInMap = weatherMap.get(hour.weather);
+            if (currentValueInMap) {
+                weatherMap.set(hour.weather, currentValueInMap + 1);
+            } else {
+                weatherMap.set(hour.weather, 1);
+            }
+        }
+
+        const averageWeather = [...weatherMap.entries()].reduce((a, e) => e[1] > a[1] ? e : a)[0];
+
+        return {
+            ...timestamp,
+            high: highestTemp,
+            low: lowestTemp,
+            averageWeather,
+        };
+    });
+
+    return finalData;
 }
 
 const formatCurrentWeatherData = (
