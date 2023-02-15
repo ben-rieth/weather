@@ -1,10 +1,15 @@
 <script lang='ts'>
+	import { getPhotographer } from "$lib/photos";
 	import { getUnits } from "$lib/units";
     import { weatherData } from "../../stores/weather";
 	import DetailedWeatherData from "../DetailedWeatherData/DetailedWeatherData.svelte";
 	import Forecast from "../Forecast/Forecast.svelte";
+	import PhotoAttribution from "../PhotoAttribution/PhotoAttribution.svelte";
 	import SaveCityButton from "../SaveCityButton/SaveCityButton.svelte";
 	import UnitSwitcher from "../UnitSwitcher/UnitSwitcher.svelte";
+
+    $: weather = $weatherData?.current.weather.toLowerCase();
+    $: photographer = getPhotographer(weather);
 </script>
 
 {#if $weatherData}
@@ -50,8 +55,8 @@
                 lat={$weatherData.lat} 
                 lon={$weatherData.lon}
             />
+            <PhotoAttribution name={photographer[0]} link={photographer[1]}/>
         </footer>
-
     </article>
 {/if}
 
@@ -92,5 +97,28 @@
     .mist {
         /* Dave Hoefler https://unsplash.com/@davehoefler */
         background-image: url('images/mist.jpg')
+    }
+
+    .fog {
+        background-image: url('images/mist.jpg')
+    }
+
+    .haze {
+        /** Alex Gindin https://unsplash.com/@alexgindin */
+        background-image: url('images/haze.jpg');
+    }
+
+    .tornado {
+        /* Nikolas Noonan https://unsplash.com/@nikolasnoonan */
+        background-image: url('/images/tornado.jpg');
+    }
+
+    .smoke {
+        /* Malachi Brooks https://unsplash.com/@mebrooks01 */
+        background-image: url('/images/smoke.jpg');
+    }
+
+    .ash {
+        background-image: url('/images/smoke.jpg');
     }
 </style>
