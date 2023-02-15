@@ -1,6 +1,7 @@
 <script lang='ts'>
 import { weatherData } from "../../stores/weather";
 	import DetailedWeatherData from "../DetailedWeatherData/DetailedWeatherData.svelte";
+	import Forecast from "../Forecast/Forecast.svelte";
 
 </script>
 
@@ -16,6 +17,10 @@ import { weatherData } from "../../stores/weather";
         </header>
             
         <DetailedWeatherData data={$weatherData.current} />
+
+        {#each $weatherData.forecast as day}
+            <Forecast data={day}/>
+        {/each}
 
         <footer>
             <button>Save City</button>
