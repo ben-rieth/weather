@@ -4,6 +4,7 @@
     import 'bootstrap-icons/font/bootstrap-icons.css';
 	import SearchForm from '../components/SearchForm/SearchForm.svelte';
 	import SavedCitiesDropdown from '../components/SavedCitiesDropdown/SavedCitiesDropdown.svelte';
+	import WeatherData from '../components/WeatherData/WeatherData.svelte';
 
 </script>
 
@@ -29,7 +30,7 @@
             Search below to see the weather!
         </article>
     {:else if $weatherStatus === 'success'}
-        <article>{JSON.stringify($weatherData)}</article>
+        <WeatherData />
     {:else if $weatherStatus === 'error'}
         <article>Weather could not be retrieved</article>
     {/if}

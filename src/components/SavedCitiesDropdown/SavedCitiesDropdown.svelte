@@ -1,7 +1,6 @@
 <script lang='ts'>
     import { savedCities } from '../../stores/weather';
     import { onMount } from 'svelte';
-	import type { SavedCity } from '../../types/Geo';
 
     onMount(async () => {
         const _storageData = localStorage.getItem('saved');
