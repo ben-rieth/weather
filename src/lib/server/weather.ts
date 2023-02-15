@@ -2,6 +2,7 @@ import axios from "axios";
 import { WEATHER_API_KEY } from "$env/static/private";
 import type { CurrentData, CurrentWeatherApiResult, DateAndTime, ForecastAPIResult, ForecastData, ForecastDataWithoutAverages } from "../../types/Weather";
 import { getTimeFromDate, unixToTime } from "$lib/time";
+import { windDirectionFromDegree } from "$lib/wind";
 
 const formatForecastData = (
     weatherForecast: ForecastAPIResult, 
@@ -101,6 +102,7 @@ const formatCurrentWeatherData = (
             weatherDescription: currentWeather['weather'][0]['description'],
             humidity: currentWeather.main.humidity,
             windSpeed: currentWeather.wind.speed,
+            windDirection: windDirectionFromDegree(currentWeather.wind.deg),
             sunriseTime: unixToTime(currentWeather.sys.sunrise, timezone),
             sunsetTime: unixToTime(currentWeather.sys.sunset, timezone),
             sunriseUnix: currentWeather.sys.sunrise * 1000,

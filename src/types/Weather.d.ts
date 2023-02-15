@@ -1,3 +1,4 @@
+import type { Direction } from "./Direction";
 import type { Unit } from "./Unit";
 
 type CurrentWeatherApiResult = {
@@ -132,6 +133,7 @@ type CurrentData = {
     weatherDescription: string;
     humidity: number;
     windSpeed: number;
+    windDirection: Direction;
     sunriseTime: string;
     sunsetTime: string;
     sunriseUnix: number;
