@@ -75,6 +75,10 @@
         background-image: url('/images/rain.jpg');
     }
 
+    .drizzle {
+        background-image: url('/images/rain.jpg');
+    }
+
     .snow {
         /* Chandler Cruttenden https://unsplash.com/@chanphoto */
         background-image: url('/images/snow.jpg')
