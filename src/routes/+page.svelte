@@ -1,6 +1,7 @@
 <script lang='ts'>
     import { weatherData, weatherStatus } from '../stores/weather';
     import '@picocss/pico';
+    import 'bootstrap-icons/font/bootstrap-icons.css';
 	import SearchForm from '../components/SearchForm/SearchForm.svelte';
 	import SavedCitiesDropdown from '../components/SavedCitiesDropdown/SavedCitiesDropdown.svelte';
 
@@ -12,12 +13,13 @@
 <main class="container">
     <nav>
         <ul>
-            <li><h1>Svelte Weather</h1></li>
+            <li><strong>Weather</strong></li>
         </ul>
         <ul>
             <li><SavedCitiesDropdown /></li>
         </ul>
     </nav>
+
     {#if $weatherStatus === 'loading'}
         <article>
             <progress />
