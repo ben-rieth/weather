@@ -38,7 +38,11 @@
     <ul role="listbox">
         {#each $savedCities as city}
             <li>
-                <a href="#top" on:click={() => getWeather(city)}>{city.city}</a>
+                <a href="#top" 
+                    on:click={() => getWeather(city)}
+                >
+                    {city.city}
+                </a>
             </li>
         {/each}
 
