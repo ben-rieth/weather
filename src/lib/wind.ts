@@ -1,5 +1,16 @@
 import type { Direction } from "../types/Direction";
 
+export const DIRECTION_ICON_MAP = new Map([
+    ['n', 'bi-arrow-up'],
+    ['ne', 'bi-arrow-up-right'],
+    ['e', 'bi-arrow-right'],
+    ['se', 'bi-arrow-down-right'],
+    ['s', 'bi-arrow-down'],
+    ['sw', 'bi-arrow-down-left'],
+    ['w', 'bi-arrow-left'],
+    ['nw', 'bi-arrow-up-left']
+]);
+
 export const windDirectionFromDegree = (windDeg: number) : Direction => {
     let dir : Direction;
     
