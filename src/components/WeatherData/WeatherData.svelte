@@ -10,13 +10,7 @@ import { weatherData } from "../../stores/weather";
 {#if $weatherData}
     <article>
         <header 
-            class="hero"
-            class:clear="{$weatherData.current.weather === 'Clear'}"
-            class:cloudy="{$weatherData.current.weather === 'Clouds'}"
-            class:thunderstorm="{$weatherData.current.weather === 'Thunderstorm'}"
-            class:snow="{$weatherData.current.weather === 'Snow'}"
-            class:mist="{$weatherData.current.weather === 'Mist'}"
-            class:rain="{$weatherData.current.weather === 'Rain'}"
+            class={`hero ${$weatherData.current.weather.toLowerCase()}`}
         >
             <hgroup>
                 <h1>{$weatherData.city}, {$weatherData.country}</h1>
@@ -73,7 +67,7 @@ import { weatherData } from "../../stores/weather";
         background-image: url('/images/snow.jpg')
     }
 
-    .cloudy {
+    .clouds {
         /*  Joonas Sild https://unsplash.com/@joonas1233  */
         background-image: url('images/cloudy.jpg')
     }
