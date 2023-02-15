@@ -7,19 +7,17 @@
     export let units: Unit;
 </script>
 
-<div class="data-grid">
-    <p>Feels Like: {data.feelsLike} {getUnits(units, "temp")}</p>
-    <p>Humidity: {data.humidity} %</p>
-    <p>Wind Speed: {data.windSpeed} {getUnits(units, "speed")}</p>
-    <p>Pressure: {data.pressure}</p>
-    <p>Sunrise: {data.sunriseTime}</p>
-    <p>Sunset: {data.sunsetTime}</p>
-</div> 
-
-<style>
-    .data-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        max-width: 800px;
-    }
-</style>
+<table role="grid">
+    <tr>
+        <td>Feels Like: {data.feelsLike}{getUnits(units, "temp")}</td>
+        <td>Humidity: {data.humidity}%</td>
+    </tr>
+    <tr>
+        <td>Wind Speed: {data.windSpeed}{getUnits(units, "speed")}</td>
+        <td>Pressure: {data.pressure} hPa</td>
+    </tr>
+    <tr>
+        <td>Sunrise: {data.sunriseTime}</td>
+        <td>Sunset: {data.sunsetTime}</td>
+    </tr>
+</table>
