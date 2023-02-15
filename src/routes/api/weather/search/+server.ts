@@ -40,14 +40,22 @@ export const GET: RequestHandler = async ({ url }: RequestEvent) => {
     try {
         const data = await getWeatherDataByCoords(
             cityData.lat, 
-            cityData.lon, 
-            cityData.city,
-            cityData.countryName,
+            cityData.lon,
             units, 
             cityData.timeZone
         );
 
-        return json(data, { status: 200 })
+        return json(
+            {
+                lat: cityData.lat,
+                lon: cityData.lon,
+                city: cityData.city,
+                country: cityData.countryName,
+                countryCode: cityData.countryCode,
+                ...data,
+            },
+            { status: 200 }
+        );
     } catch (err) {
         return new Response("Cannot get weather data from server", { status: 500 })
     }

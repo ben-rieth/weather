@@ -43,7 +43,7 @@
                 <a href="#top" 
                     on:click={() => getWeather(city)}
                 >
-                    {city.city}
+                    {city.city}, {city.countryCode}
                 </a>
             </li>
         {/each}

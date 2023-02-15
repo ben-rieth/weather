@@ -39,6 +39,7 @@ type SavedCity = {
     lon: number;
     city: string;
     country: string;
+    countryCode: string;
 }
 
 export { ReverseGeocodingApiResult, SavedCity };

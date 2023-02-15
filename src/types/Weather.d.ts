@@ -139,6 +139,7 @@ type WeatherData = DateAndTime & {
     lon: number;
     city: string;
     country: string;
+    countryCode: string;
     current: CurrentData;
     forecast: ForecastData[];
 }

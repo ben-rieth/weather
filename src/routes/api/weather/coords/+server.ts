@@ -3,7 +3,6 @@ import { getWeatherDataByCoords } from "$lib/server/weather";
 import { getUnitsBasedOnCountry } from "$lib/units";
 import { json } from "@sveltejs/kit";
 import type { RequestEvent, RequestHandler } from "../$types";
-import type { WeatherData } from "../../../../types/Weather";
 import { z } from 'zod';
 
 const schema = z.object({
@@ -41,8 +40,25 @@ export const GET: RequestHandler = async ({ url }: RequestEvent) => {
     const units : 'imperial' | 'metric' = params.units ?? getUnitsBasedOnCountry(geoData.countryCode);
 
     try {
-        const weather: WeatherData = await getWeatherDataByCoords(params.lat, params.lon, geoData.city, geoData.countryName, units, geoData.zone);
-        return json(weather, { status: 200 });
+        const weather= await getWeatherDataByCoords(
+            params.lat, 
+            params.lon,
+            units, 
+            geoData.zone
+        );
+
+        return json(
+            {
+                lat: params.lat,
+                lon: params.lon,
+                city: geoData.city,
+                country: geoData.countryName,
+                countryCode: geoData.countryCode,
+                ...weather,
+            },
+            { status: 200 }
+        );
+
     } catch (err) {
         return new Response("Cannot get weather data from server", { status: 500 });
     }

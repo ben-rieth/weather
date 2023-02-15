@@ -1,6 +1,6 @@
 import axios from "axios";
 import { WEATHER_API_KEY } from "$env/static/private";
-import type { CurrentData, CurrentWeatherApiResult, DateAndTime, ForecastAPIResult, ForecastData, WeatherData } from "../../types/Weather";
+import type { CurrentData, CurrentWeatherApiResult, DateAndTime, ForecastAPIResult, ForecastData } from "../../types/Weather";
 import { getTimeFromDate, unixToTime } from "$lib/time";
 
 const formatForecastData = (
@@ -74,12 +74,10 @@ const formatCurrentWeatherData = (
 
 export const getWeatherDataByCoords = async (
     lat: number, 
-    lon: number, 
-    city: string,
-    country: string,
+    lon: number,
     units: "imperial" | "metric", 
     timezone: string,
-) : Promise<WeatherData> => {
+) => {
 
     const currentWeatherPromise = axios.get(
         'https://api.openweathermap.org/data/2.5/weather',
@@ -111,10 +109,6 @@ export const getWeatherDataByCoords = async (
     );
 
     return {
-        lat,
-        lon,
-        city,
-        country,
         ...currentWeather,
         forecast: weatherForecast,
     };

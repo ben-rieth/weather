@@ -31,6 +31,7 @@
                 city={{
                     city: $weatherData.city,
                     country: $weatherData.country,
+                    countryCode: $weatherData.countryCode,
                     lat: $weatherData.lat,
                     lon: $weatherData.lon,
                 }}
