@@ -1,10 +1,8 @@
 <script lang='ts'>
-import { weatherData } from "../../stores/weather";
+    import { weatherData } from "../../stores/weather";
 	import DetailedWeatherData from "../DetailedWeatherData/DetailedWeatherData.svelte";
 	import Forecast from "../Forecast/Forecast.svelte";
 	import SaveCityButton from "../SaveCityButton/SaveCityButton.svelte";
-
-    console.log($weatherData?.current.weather)
 </script>
 
 {#if $weatherData}
@@ -24,8 +22,8 @@ import { weatherData } from "../../stores/weather";
             <DetailedWeatherData data={$weatherData.current} />
         </section>
 
-        {#each $weatherData.forecast as day}
-            <Forecast data={day}/>
+        {#each $weatherData.forecast as day, i}
+            <Forecast data={day} open={i === 0}/>
         {/each}
 
         <footer>

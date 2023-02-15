@@ -2,9 +2,10 @@
 	import type { ForecastData } from "../../types/Weather";
 
     export let data : ForecastData;
+    export let open : boolean;
 </script>
 
-<details>
+<details open={open}>
     <summary>{data.weekday}</summary>
     <figure>
         <table>
