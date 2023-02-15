@@ -54,6 +54,7 @@ export const GET: RequestHandler = async ({ url }: RequestEvent) => {
                 city: geoData.city,
                 country: geoData.countryName,
                 countryCode: geoData.countryCode,
+                units,
                 ...weather,
             },
             { status: 200 }

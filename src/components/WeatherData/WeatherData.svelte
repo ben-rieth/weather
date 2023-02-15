@@ -3,6 +3,7 @@
 	import DetailedWeatherData from "../DetailedWeatherData/DetailedWeatherData.svelte";
 	import Forecast from "../Forecast/Forecast.svelte";
 	import SaveCityButton from "../SaveCityButton/SaveCityButton.svelte";
+	import UnitSwitcher from "../UnitSwitcher/UnitSwitcher.svelte";
 </script>
 
 {#if $weatherData}
@@ -35,6 +36,11 @@
                     lat: $weatherData.lat,
                     lon: $weatherData.lon,
                 }}
+            />
+            <UnitSwitcher 
+                units={$weatherData.units} 
+                lat={$weatherData.lat} 
+                lon={$weatherData.lon}
             />
         </footer>
 

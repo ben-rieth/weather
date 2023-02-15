@@ -1,3 +1,5 @@
+import type { Unit } from "./Unit";
+
 type CurrentWeatherApiResult = {
     coord: {
         lon: number;
@@ -140,6 +142,7 @@ type WeatherData = DateAndTime & {
     city: string;
     country: string;
     countryCode: string;
+    units: Unit;
     current: CurrentData;
     forecast: ForecastData[];
 }

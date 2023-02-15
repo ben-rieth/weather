@@ -52,6 +52,7 @@ export const GET: RequestHandler = async ({ url }: RequestEvent) => {
                 city: cityData.city,
                 country: cityData.countryName,
                 countryCode: cityData.countryCode,
+                units,
                 ...data,
             },
             { status: 200 }
