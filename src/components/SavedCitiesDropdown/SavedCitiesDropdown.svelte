@@ -15,7 +15,7 @@
     <summary aria-haspopup="listbox">Saved Cities</summary>
     <ul role="listbox">
         {#each $savedCities as city}
-            <li>{city.city}, {city.country}</li>
+            <li>{city.city}</li>
         {/each}
 
         {#if $savedCities.length === 0}

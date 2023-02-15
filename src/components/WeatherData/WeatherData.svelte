@@ -2,6 +2,7 @@
 import { weatherData } from "../../stores/weather";
 	import DetailedWeatherData from "../DetailedWeatherData/DetailedWeatherData.svelte";
 	import Forecast from "../Forecast/Forecast.svelte";
+	import SaveCityButton from "../SaveCityButton/SaveCityButton.svelte";
 
 </script>
 
@@ -23,7 +24,14 @@ import { weatherData } from "../../stores/weather";
         {/each}
 
         <footer>
-            <button>Save City</button>
+            <SaveCityButton 
+                city={{
+                    city: $weatherData.city,
+                    country: $weatherData.country,
+                    lat: $weatherData.lat,
+                    lon: $weatherData.lon,
+                }}
+            />
         </footer>
 
     </article>
