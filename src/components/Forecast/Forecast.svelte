@@ -6,6 +6,35 @@
     export let data : ForecastData;
     export let open : boolean;
     export let units: Unit;
+
+    let gridIcon;
+    console.log(data.averageWeather)
+    switch(data.averageWeather) {
+        case 'Clouds':
+            gridIcon = 'bi-cloud';
+            break;
+        case 'Clear':
+            gridIcon = 'bi-brightness-high';
+            break;
+        case 'Thunderstorm':
+            gridIcon = 'bi-cloud-lightning-rain';
+            break;
+        case 'Rain':
+            gridIcon = 'bi-cloud-rain';
+            break;
+        case 'Drizzle':
+            gridIcon = 'bi-cloud-drizzle';
+            break;
+        case 'Snow':
+            gridIcon = 'bi-cloud-snow';
+            break;
+        case 'Mist':
+            gridIcon = 'bi-cloud-fog';
+            break;
+        default:
+            gridIcon = 'bi-brightness-high';
+            break;
+    }
 </script>
 
 {#if data.hourly.length > 2}
@@ -21,7 +50,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row"><i class="bi bi-cloud" /></th>
+                        <th scope="row"><i class={`bi ${gridIcon}`} /></th>
                         {#each data.hourly as timestamp}
                             <td>{timestamp.weather}</td>
                         {/each}
