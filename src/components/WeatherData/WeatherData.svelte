@@ -4,11 +4,20 @@ import { weatherData } from "../../stores/weather";
 	import Forecast from "../Forecast/Forecast.svelte";
 	import SaveCityButton from "../SaveCityButton/SaveCityButton.svelte";
 
+    console.log($weatherData?.current.weather)
 </script>
 
 {#if $weatherData}
     <article>
-        <header class="hero">
+        <header 
+            class="hero"
+            class:clear="{$weatherData.current.weather === 'Clear'}"
+            class:cloudy="{$weatherData.current.weather === 'Clouds'}"
+            class:thunderstorm="{$weatherData.current.weather === 'Thunderstorm'}"
+            class:snow="{$weatherData.current.weather === 'Snow'}"
+            class:mist="{$weatherData.current.weather === 'Mist'}"
+            class:rain="{$weatherData.current.weather === 'Rain'}"
+        >
             <hgroup>
                 <h1>{$weatherData.city}, {$weatherData.country}</h1>
                 <h2>{$weatherData.current.temp}</h2>
@@ -41,8 +50,36 @@ import { weatherData } from "../../stores/weather";
 
 <style>
     .hero {
-        background-image: url('/images/clear-skies.jpg');
         background-size: cover;
         background-position: center;
+    }
+
+    .clear {
+        background-image: url('/images/clear.jpg');
+    }
+
+    .thunderstorm {
+        /* Johannes Plenio https://unsplash.com/@jplenio */
+        background-image: url('/images/thunderstorm.jpg');
+    }
+
+    .rain {
+        /* Valentin Müller https://unsplash.com/@wackeltin_meem */
+        background-image: url('/images/rain.jpg');
+    }
+
+    .snow {
+        /* Chandler Cruttenden https://unsplash.com/@chanphoto */
+        background-image: url('/images/snow.jpg')
+    }
+
+    .cloudy {
+        /*  Joonas Sild https://unsplash.com/@joonas1233  */
+        background-image: url('images/cloudy.jpg')
+    }
+
+    .mist {
+        /* Dave Hoefler https://unsplash.com/@davehoefler */
+        background-image: url('images/mist.jpg')
     }
 </style>
