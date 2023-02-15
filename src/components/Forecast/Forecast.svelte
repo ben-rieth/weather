@@ -7,7 +7,7 @@
     export let open : boolean;
     export let units: Unit;
 
-    let gridIcon;
+    let gridIcon : string;
     console.log(data.averageWeather)
     switch(data.averageWeather) {
         case 'Clouds':
@@ -37,9 +37,15 @@
     }
 </script>
 
-{#if data.hourly.length > 2}
+{#if data.hourly.length > 1}
     <details open={open}>
-        <summary>{data.weekday}</summary>
+        <summary>
+            <i class={`bi ${gridIcon}`} />
+            {data.weekday}
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            {data.high}° &nbsp;{data.low}°
+        </summary>
+
         <figure>
             <table>
                 <thead>

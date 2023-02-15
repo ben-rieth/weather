@@ -36,7 +36,7 @@
 </script>
 
 <details role="list">
-    <summary aria-haspopup="listbox">Saved Cities&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</summary>
+    <summary aria-haspopup="listbox">Saved Cities&nbsp;&nbsp;&nbsp;&nbsp;</summary>
     <ul role="listbox">
         {#each $savedCities as city}
             <li>
