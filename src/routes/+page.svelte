@@ -14,7 +14,19 @@
 <main class="container">
     <nav>
         <ul>
-            <li><strong>Weather</strong></li>
+            <li>
+                <picture>
+                    <source srcset="/icon-white.svg" media="(prefers-color-scheme: dark)" />
+                    <img 
+                        src="/icon-black.svg" 
+                        alt="Icon"
+                        class="icon" 
+                    />
+                </picture>
+            </li>
+            <li>
+                <strong class="website-title">Weather</strong>
+            </li>
         </ul>
         <ul>
             <li><SavedCitiesDropdown /></li>
@@ -38,3 +50,12 @@
     <SearchForm />
 </main>
 
+<style>
+    .icon {
+        width: 1.5rem;
+    }
+
+    .website-title {
+        font-size: 1.5rem;
+    }
+</style>
