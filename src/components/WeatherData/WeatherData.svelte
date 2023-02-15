@@ -5,26 +5,25 @@ import { weatherData } from "../../stores/weather";
 
 {#if $weatherData}
     <article>
-        <header>
-            <h2>{$weatherData.city}, {$weatherData.country}</h2>
+        <header class="hero">
+            <hgroup>
+                <h1>{$weatherData.city}, {$weatherData.country}</h1>
+                <h2>{$weatherData.current.temp}</h2>
+                <!-- svelte-ignore a11y-missing-content -->
+                <h2></h2>
+            </hgroup>    
         </header>
 
         <details open>
-            <summary>Weather Right Now</summary>
-            <div class="hero">
-                <hgroup>
-                    <h2>{$weatherData.current.temp}</h2>
-                    <h3>{$weatherData.current.weather}</h3>
-                </hgroup>       
+            <summary>Detailed Current Weather</summary>
                 <div class="data-grid">
-                    <p>feels like</p>
-                    <p>humidity</p>
-                    <p>wind speed</p>
-                    <p>pressure</p>
-                    <p>sunrise</p>
-                    <p>sunset</p>
+                    <p>Feels Like: {$weatherData.current.feelsLike}</p>
+                    <p>Humidity: {$weatherData.current.humidity}</p>
+                    <p>Wind Speed: {$weatherData.current.windSpeed}</p>
+                    <p>Pressure: {$weatherData.current.pressure}</p>
+                    <p>Sunrise: {$weatherData.current.sunriseTime}</p>
+                    <p>Sunset: {$weatherData.current.sunsetTime}</p>
                 </div>
-            </div>
         </details>      
 
         <footer>
@@ -36,7 +35,6 @@ import { weatherData } from "../../stores/weather";
 
 <style>
     .hero {
-        padding: 30px 20px;
         background-image: url('/images/clear-skies.jpg');
         background-size: cover;
         background-position: center;
