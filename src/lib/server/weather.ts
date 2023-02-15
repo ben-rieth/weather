@@ -6,12 +6,12 @@ import { getTimeFromDate, unixToTime } from "$lib/time";
 const formatForecastData = (
     weatherForecast: ForecastAPIResult, 
     timezone: string
-): ForecastData => {
+): ForecastData[] => {
 
     // get the starting date
     let currentDate = new Date(weatherForecast.list[0]['dt'] * 1000).toLocaleDateString([], { timeZone: timezone});
 
-    const data: ForecastData = [];
+    const data: ForecastData[] = [];
 
     // format the data for use on the frontend
     weatherForecast.list.forEach((timestamp) => {

@@ -113,7 +113,7 @@ type ForecastData = {
         weatherDescription: string;
         precipitation: number;
     }[];
-}[];
+};
 
 type CurrentData = {
     temp: string;
@@ -140,7 +140,7 @@ type WeatherData = DateAndTime & {
     city: string;
     country: string;
     current: CurrentData;
-    forecast: ForecastData;
+    forecast: ForecastData[];
 }
 
 export { 
