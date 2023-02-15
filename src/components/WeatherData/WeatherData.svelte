@@ -17,7 +17,9 @@ import { weatherData } from "../../stores/weather";
             </hgroup>    
         </header>
             
-        <DetailedWeatherData data={$weatherData.current} />
+        <section>
+            <DetailedWeatherData data={$weatherData.current} />
+        </section>
 
         {#each $weatherData.forecast as day}
             <Forecast data={day}/>
