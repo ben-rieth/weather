@@ -34,4 +34,11 @@ type ReverseGeocodingApiResult = {
     state: string | undefined;
 }[];
 
-export { ReverseGeocodingApiResult };
+type SavedCity = {
+    lat: number;
+    lon: number;
+    city: string;
+    country: string;
+}
+
+export { ReverseGeocodingApiResult, SavedCity };

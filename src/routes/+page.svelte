@@ -2,6 +2,7 @@
     import { weatherData, weatherStatus } from '../stores/weather';
     import '@picocss/pico';
 	import SearchForm from '../components/SearchForm/SearchForm.svelte';
+	import SavedCitiesDropdown from '../components/SavedCitiesDropdown/SavedCitiesDropdown.svelte';
 
 </script>
 
@@ -13,10 +14,14 @@
         <ul>
             <li><h1>Svelte Weather</h1></li>
         </ul>
+        <ul>
+            <li><SavedCitiesDropdown /></li>
+        </ul>
     </nav>
-
     {#if $weatherStatus === 'loading'}
-        <article aria-busy="true" />
+        <article>
+            <progress />
+        </article>
     {:else if $weatherStatus === 'untouched'}
         <article>
             Search below to see the weather!
