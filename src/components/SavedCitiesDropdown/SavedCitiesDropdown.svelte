@@ -4,7 +4,6 @@
     import axios from 'axios';
 	import type { City } from '../../types/Geo';
 	import { PUBLIC_URL } from '$env/static/public';
-	import CountryEmoji from '../CountryEmoji/CountryEmoji.svelte';
 
     const coordsEndpoint = `${PUBLIC_URL}/api/weather/coords`
 
@@ -12,7 +11,11 @@
         const _storageData = localStorage.getItem('saved');
 
         if (_storageData) {
-            $savedCities = JSON.parse(_storageData);
+            const saved: City[] = JSON.parse(_storageData);
+
+            $savedCities = saved;
+
+            await getWeather(saved[0]);
         }
     });
 
@@ -34,6 +37,26 @@
             $weatherStatus = 'error';
         }
     };
+
+    // const setAsDefault = (city: City) => {
+    //     localStorage.setItem('default', JSON.stringify(city));
+    // }
+
+    // const isDefault = (city: City) => {
+    //     const _data = localStorage.getItem('default');
+
+    //     if (!_data) {
+    //         return false;
+    //     }
+
+    //     const json: City = JSON.parse(_data);
+
+    //     if (`${json.city}${json.state}${json.countryName}` === `${city.city}${city.state}${city.countryName}`) {
+    //         return true;
+    //     }
+
+    //     return false;
+    // }
 </script>
 
 <details role="list">
