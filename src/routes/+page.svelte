@@ -1,9 +1,8 @@
 <script lang='ts'>
-    import { weatherData, weatherStatus } from '../stores/weather';
+    import { weatherStatus } from '../stores/weather';
     import '@picocss/pico';
     import 'bootstrap-icons/font/bootstrap-icons.css';
 	import SearchForm from '../components/SearchForm/SearchForm.svelte';
-	import SavedCitiesDropdown from '../components/SavedCitiesDropdown/SavedCitiesDropdown.svelte';
 	import WeatherData from '../components/WeatherData/WeatherData.svelte';
 	import NavBar from '../components/NavBar/NavBar.svelte';
 	import Footer from '../components/Footer/Footer.svelte';

@@ -1,6 +1,6 @@
 <script lang='ts'>
     import { slide } from 'svelte/transition';
-	import { savedCities } from "../../stores/weather";
+	import { defaultCityModalOpen, savedCities } from "../../stores/weather";
 	import type { City } from "../../types/Geo";
 
     export let city : City;
@@ -8,6 +8,8 @@
     const addCity = () => {
         $savedCities = [...$savedCities, city];
         localStorage.setItem('saved', JSON.stringify($savedCities));
+        
+        $defaultCityModalOpen = true;
     }
 
     const removeCity = () => {

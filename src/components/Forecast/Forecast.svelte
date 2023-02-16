@@ -8,7 +8,6 @@
     export let units: Unit;
 
     let gridIcon : string;
-    console.log(data.averageWeather)
     switch(data.averageWeather) {
         case 'Clouds':
             gridIcon = 'bi-cloud';

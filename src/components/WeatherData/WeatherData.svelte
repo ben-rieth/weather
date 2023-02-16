@@ -6,12 +6,15 @@
 	import Forecast from "../Forecast/Forecast.svelte";
 	import PhotoAttribution from "../PhotoAttribution/PhotoAttribution.svelte";
 	import SaveCityButton from "../SaveCityButton/SaveCityButton.svelte";
+	import SetDefaultModal from "../SetDefaultModal/SetDefaultModal.svelte";
 	import UnitSwitcher from "../UnitSwitcher/UnitSwitcher.svelte";
 
     $: weather = $weatherData?.current.weather.toLowerCase();
 </script>
 
 {#if $weatherData}
+    <SetDefaultModal city={$weatherData.city} />
+
     <article>
         <header 
             class={`hero ${weather}`}
