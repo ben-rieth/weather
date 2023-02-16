@@ -6,6 +6,7 @@
 	import WeatherData from '../components/WeatherData/WeatherData.svelte';
 	import NavBar from '../components/NavBar/NavBar.svelte';
 	import Footer from '../components/Footer/Footer.svelte';
+	import SavedCitiesDropdown from '../components/SavedCitiesDropdown/SavedCitiesDropdown.svelte';
 
 </script>
 
@@ -14,6 +15,8 @@
 
 <main class="container">
     <NavBar />
+
+    <SavedCitiesDropdown />
 
     {#if $weatherStatus === 'loading'}
         <article>

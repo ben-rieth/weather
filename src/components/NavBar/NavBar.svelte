@@ -18,9 +18,6 @@
             <strong class="website-title">Weather</strong>
         </li>
     </ul>
-    <ul>
-        <li><SavedCitiesDropdown /></li>
-    </ul>
 </nav>
 
 <style>
