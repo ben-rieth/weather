@@ -19,20 +19,24 @@
     <SavedCitiesDropdown />
 
     {#if $weatherStatus === 'loading'}
-        <article>
+        <article class="fetching">
             <progress />
         </article>
     {:else if $weatherStatus === 'untouched'}
-        <article>
-            Search below to see the weather!
-        </article>
+        <SearchForm />
     {:else if $weatherStatus === 'success'}
         <WeatherData />
+        <SearchForm />
     {:else if $weatherStatus === 'error'}
         <article>Weather could not be retrieved</article>
+        <SearchForm />
     {/if}
-
-    <SearchForm />
 
     <Footer />
 </main>
+
+<style>
+    .fetching {
+        height: 80vh;
+    }
+</style>
