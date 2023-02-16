@@ -6,6 +6,7 @@
 	import SavedCitiesDropdown from '../components/SavedCitiesDropdown/SavedCitiesDropdown.svelte';
 	import WeatherData from '../components/WeatherData/WeatherData.svelte';
 	import NavBar from '../components/NavBar/NavBar.svelte';
+	import Footer from '../components/Footer/Footer.svelte';
 
 </script>
 
@@ -30,4 +31,6 @@
     {/if}
 
     <SearchForm />
+
+    <Footer />
 </main>
