@@ -9,7 +9,7 @@
         $savedCities = [...$savedCities, city];
         localStorage.setItem('saved', JSON.stringify($savedCities));
         
-        $defaultCityModalOpen = true;
+        // $defaultCityModalOpen = true;
     }
 
     const removeCity = () => {

@@ -13,7 +13,7 @@
 </script>
 
 {#if $weatherData}
-    <SetDefaultModal city={$weatherData.city} />
+    <!-- <SetDefaultModal city={$weatherData.city} /> -->
 
     <article>
         <header 

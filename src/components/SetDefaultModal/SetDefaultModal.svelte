@@ -4,6 +4,8 @@
 
     export let city : City;
 
+    $: $defaultCityModalOpen && openModal();
+
     const openModal = () => {
         document.documentElement.classList.add('modal-is-open', 'modal-is-opening');
 
