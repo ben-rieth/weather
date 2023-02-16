@@ -34,15 +34,18 @@ const getCountryCode = async (country: string) => {
  * @param countryCode the CCA2 code of a country
  * @returns {string} the common name of the country
  */
-const getCountryName = async (countryCode: string) => {
+const getCountryData = async (countryCode: string) => {
     const data = await axios.get(
         `https://restcountries.com/v3.1/alpha/${countryCode}`,
     ).then(res => res.data);
 
-    return data[0]['name']['common'];
+    return {
+        name:  data[0]['name']['common'],
+        flag: data[0]['flags']['svg']
+    };
 }
 
 export {
     getCountryCode,
-    getCountryName
+    getCountryData
 }

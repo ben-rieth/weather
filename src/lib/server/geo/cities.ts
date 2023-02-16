@@ -1,7 +1,7 @@
 import { WEATHER_API_KEY } from "$env/static/private";
 import axios from "axios";
 import type { City } from "../../../types/Geo";
-import { getCountryCode, getCountryName } from "./counties"
+import { getCountryCode, getCountryData } from "./counties"
 import { getTimeZone } from "./timezone";
 
 /**
@@ -40,15 +40,16 @@ export const getCityLocation = async (city: string, country: string | undefined)
         const lon = data[0]['lon'];
         code = data[0]['country'];
 
-        const [zone, countryName] = await Promise.all([
+        const [zone, country] = await Promise.all([
             getTimeZone(Number(lat), Number(lon)),
-            getCountryName(code),
+            getCountryData(code),
         ]);
 
         return {
             lat,
             lon,
-            countryName,
+            countryName: country.name,
+            countryFlag: country.flag,
             zone,
             city: data[0]['name'],
             countryCode: code,

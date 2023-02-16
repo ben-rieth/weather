@@ -47,6 +47,7 @@ type City = {
     lon: number,
     countryName: string,
     countryCode: string,
+    countryFlag: string,
     city: string,
     state: string | undefined,
     zone: string,
