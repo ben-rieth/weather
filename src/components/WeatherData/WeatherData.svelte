@@ -1,5 +1,4 @@
 <script lang='ts'>
-	import { getPhotographer } from "$lib/photos";
 	import { getUnits } from "$lib/units";
     import { weatherData } from "../../stores/weather";
 	import CountryEmoji from "../CountryEmoji/CountryEmoji.svelte";
@@ -10,7 +9,6 @@
 	import UnitSwitcher from "../UnitSwitcher/UnitSwitcher.svelte";
 
     $: weather = $weatherData?.current.weather.toLowerCase();
-    $: photographer = getPhotographer(weather);
 </script>
 
 {#if $weatherData}
@@ -26,10 +24,10 @@
                 <h2>{$weatherData.current.temp} {getUnits($weatherData.units, "temp")}</h2>
                 <!-- svelte-ignore a11y-missing-content -->
                 <h2></h2>
-            </hgroup>    
+            </hgroup> 
         </header>
             
-        <section>
+        <section>  
             <DetailedWeatherData 
                 data={$weatherData.current} 
                 units={$weatherData.units} 
@@ -53,7 +51,7 @@
                 lat={$weatherData.city.lat} 
                 lon={$weatherData.city.lon}
             />
-            <PhotoAttribution name={photographer[0]} link={photographer[1]}/>
+            <PhotoAttribution weather={weather} /> 
         </footer>
     </article>
 {/if}
