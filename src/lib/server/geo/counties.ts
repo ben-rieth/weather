@@ -41,7 +41,7 @@ const getCountryData = async (countryCode: string) => {
 
     return {
         name:  data[0]['name']['common'],
-        flag: data[0]['flags']['svg']
+        flag: data[0]['flag']
     };
 }
 

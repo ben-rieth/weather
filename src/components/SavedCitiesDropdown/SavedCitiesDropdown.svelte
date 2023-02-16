@@ -2,8 +2,9 @@
     import { weatherData, weatherStatus, savedCities } from '../../stores/weather';
     import { onMount } from 'svelte';
     import axios from 'axios';
-	import type { SavedCity } from '../../types/Geo';
+	import type { City } from '../../types/Geo';
 	import { PUBLIC_URL } from '$env/static/public';
+	import CountryEmoji from '../CountryEmoji/CountryEmoji.svelte';
 
     const coordsEndpoint = `${PUBLIC_URL}/api/weather/coords`
 
@@ -15,7 +16,7 @@
         }
     });
 
-    const getWeather = async (city: SavedCity) => {
+    const getWeather = async (city: City) => {
         $weatherStatus = 'loading';
 
         try {
@@ -43,7 +44,7 @@
                 <a href="#top" 
                     on:click={() => getWeather(city)}
                 >
-                    {city.city}, {city.countryCode}
+                    {city.city}{city.state && `, ${city.state}`}
                 </a>
             </li>
         {/each}

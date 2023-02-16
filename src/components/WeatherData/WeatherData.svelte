@@ -2,6 +2,7 @@
 	import { getPhotographer } from "$lib/photos";
 	import { getUnits } from "$lib/units";
     import { weatherData } from "../../stores/weather";
+	import CountryEmoji from "../CountryEmoji/CountryEmoji.svelte";
 	import DetailedWeatherData from "../DetailedWeatherData/DetailedWeatherData.svelte";
 	import Forecast from "../Forecast/Forecast.svelte";
 	import PhotoAttribution from "../PhotoAttribution/PhotoAttribution.svelte";
@@ -18,7 +19,10 @@
             class={`hero ${weather}`}
         >
             <hgroup>
-                <h1>{$weatherData.city.city}{$weatherData.city.state && `, ${$weatherData.city.state}`}</h1>
+                <h1>
+                    <span id="city">{$weatherData.city.city}{$weatherData.city.state && `, ${$weatherData.city.state}`}</span>
+                    <CountryEmoji flag={$weatherData.city.countryFlag} size='md' />
+                </h1>
                 <h2>{$weatherData.current.temp} {getUnits($weatherData.units, "temp")}</h2>
                 <!-- svelte-ignore a11y-missing-content -->
                 <h2></h2>
@@ -55,6 +59,10 @@
 {/if}
 
 <style>
+    .flag {
+        width: 30px;
+    }
+
     .hero {
         background-size: cover;
         background-position: center;
