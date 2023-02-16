@@ -1,10 +1,10 @@
 import { WEATHER_API_KEY } from "$env/static/private"
 import axios from "axios"
-import type { ReverseGeocodingApiResult } from "../../../types/Geo";
+import type { City, ReverseGeocodingApiResult } from "../../../types/Geo";
 import { getCountryName } from "./counties";
 import { getTimeZone } from "./timezone";
 
-export const getGeoDataFromCoords = async (lat: number, lon: number) => {
+export const getGeoDataFromCoords = async (lat: number, lon: number) : Promise<City> => {
     const geoData : ReverseGeocodingApiResult = await axios.get(
         'https://api.openweathermap.org/geo/1.0/reverse',
         {

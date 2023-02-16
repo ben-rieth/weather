@@ -42,4 +42,14 @@ type SavedCity = {
     countryCode: string;
 }
 
-export { ReverseGeocodingApiResult, SavedCity };
+type City = {
+    lat: number,
+    lon: number,
+    countryName: string,
+    countryCode: string,
+    city: string,
+    state: string | undefined,
+    zone: string,
+}
+
+export { ReverseGeocodingApiResult, SavedCity, City };

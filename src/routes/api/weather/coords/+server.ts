@@ -49,11 +49,7 @@ export const GET: RequestHandler = async ({ url }: RequestEvent) => {
 
         return json(
             {
-                lat: params.lat,
-                lon: params.lon,
-                city: geoData.city,
-                country: geoData.countryName,
-                countryCode: geoData.countryCode,
+                city: geoData,
                 units,
                 ...weather,
             },

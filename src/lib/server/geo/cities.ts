@@ -1,17 +1,8 @@
 import { WEATHER_API_KEY } from "$env/static/private";
 import axios from "axios";
+import type { City } from "../../../types/Geo";
 import { getCountryCode, getCountryName } from "./counties"
 import { getTimeZone } from "./timezone";
-
-export type City = {
-    lat: string,
-    lon: string,
-    countryName: string,
-    countryCode: string,
-    city: string,
-    state: string,
-    timeZone: string,
-}
 
 /**
  * Get the location data for the specified city
@@ -20,7 +11,7 @@ export type City = {
  * @param {string | undefined} country the country the city is in if known
  * @returns {City | undefined} the geolocation data for the city or undefined if city could not be found
  */
-export const getCityLocation = async (city: string, country: string | undefined) => {
+export const getCityLocation = async (city: string, country: string | undefined): Promise<City> => {
 
     // get country code
     let code = country ? await getCountryCode(country) : undefined;
@@ -49,7 +40,7 @@ export const getCityLocation = async (city: string, country: string | undefined)
         const lon = data[0]['lon'];
         code = data[0]['country'];
 
-        const [timeZone, countryName] = await Promise.all([
+        const [zone, countryName] = await Promise.all([
             getTimeZone(Number(lat), Number(lon)),
             getCountryName(code),
         ]);
@@ -58,7 +49,7 @@ export const getCityLocation = async (city: string, country: string | undefined)
             lat,
             lon,
             countryName,
-            timeZone,
+            zone,
             city: data[0]['name'],
             countryCode: code,
             state: data[0]['state']

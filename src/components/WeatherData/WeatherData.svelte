@@ -15,10 +15,10 @@
 {#if $weatherData}
     <article>
         <header 
-            class={`hero ${$weatherData.current.weather.toLowerCase()}`}
+            class={`hero ${weather}`}
         >
             <hgroup>
-                <h1>{$weatherData.city}, {$weatherData.country}</h1>
+                <h1>{$weatherData.city.city}{$weatherData.city.state && `, ${$weatherData.city.state}`}</h1>
                 <h2>{$weatherData.current.temp} {getUnits($weatherData.units, "temp")}</h2>
                 <!-- svelte-ignore a11y-missing-content -->
                 <h2></h2>
@@ -42,18 +42,12 @@
 
         <footer>
             <SaveCityButton 
-                city={{
-                    city: $weatherData.city,
-                    country: $weatherData.country,
-                    countryCode: $weatherData.countryCode,
-                    lat: $weatherData.lat,
-                    lon: $weatherData.lon,
-                }}
+                city={$weatherData.city}
             />
             <UnitSwitcher 
                 units={$weatherData.units} 
-                lat={$weatherData.lat} 
-                lon={$weatherData.lon}
+                lat={$weatherData.city.lat} 
+                lon={$weatherData.city.lon}
             />
             <PhotoAttribution name={photographer[0]} link={photographer[1]}/>
         </footer>

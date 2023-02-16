@@ -42,16 +42,12 @@ export const GET: RequestHandler = async ({ url }: RequestEvent) => {
             cityData.lat, 
             cityData.lon,
             units, 
-            cityData.timeZone
+            cityData.zone
         );
 
         return json(
             {
-                lat: cityData.lat,
-                lon: cityData.lon,
-                city: cityData.city,
-                country: cityData.countryName,
-                countryCode: cityData.countryCode,
+                city: cityData,
                 units,
                 ...data,
             },

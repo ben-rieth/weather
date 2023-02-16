@@ -1,4 +1,5 @@
 import type { Direction } from "./Direction";
+import type { City } from "./Geo";
 import type { Unit } from "./Unit";
 
 type CurrentWeatherApiResult = {
@@ -147,12 +148,8 @@ type DateAndTime = {
 }
 
 type WeatherData = DateAndTime & {
-    lat: number;
-    lon: number;
-    city: string;
-    country: string;
-    countryCode: string;
     units: Unit;
+    city: City
     current: CurrentData;
     forecast: ForecastData[];
 }

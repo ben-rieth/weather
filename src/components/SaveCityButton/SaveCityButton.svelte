@@ -1,9 +1,9 @@
 <script lang='ts'>
     import { slide } from 'svelte/transition';
 	import { savedCities } from "../../stores/weather";
-	import type { SavedCity } from "../../types/Geo";
+	import type { City } from "../../types/Geo";
 
-    export let city : SavedCity;
+    export let city : City;
 
     const addCity = () => {
         $savedCities = [...$savedCities, city];
@@ -11,11 +11,11 @@
     }
 
     const removeCity = () => {
-        $savedCities = $savedCities.filter(saved => `${saved.city}, ${saved.country}` !== `${city.city}, ${city.country}`);
+        $savedCities = $savedCities.filter(saved => `${saved.city}, ${saved.countryCode}` !== `${city.city}, ${city.countryCode}`);
         localStorage.setItem('saved', JSON.stringify($savedCities));
     }
 
-    $: cityIsSaved = !!$savedCities.find(saved => `${saved.city}, ${saved.country}` === `${city.city}, ${city.country}`);
+    $: cityIsSaved = !!$savedCities.find(saved => `${saved.city}, ${saved.countryCode}` === `${city.city}, ${city.countryCode}`);
 </script>
 
 {#if !cityIsSaved}
