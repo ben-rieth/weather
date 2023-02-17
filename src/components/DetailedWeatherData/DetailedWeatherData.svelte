@@ -22,7 +22,7 @@
     </tr>
     <tr>
         <td>Feels Like: {data.feelsLike}{getUnits(units, "temp")}</td>
-        <td>Humidity: {data.humidity}%</td>
+        <td>Humidity: {data.humidity.toFixed(0)}%</td>
     </tr>
     <tr>
         <td>

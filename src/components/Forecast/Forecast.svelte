@@ -69,7 +69,7 @@
                     <tr>
                         <th scope="row"><i class="bi bi-umbrella" /></th>
                         {#each data.hourly as timestamp}
-                            <td>{timestamp.precipitation} %</td>
+                            <td>{timestamp.precipitation.toFixed(0)} %</td>
                         {/each}
                     </tr>
                 </tbody>
