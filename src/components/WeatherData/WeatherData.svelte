@@ -2,11 +2,11 @@
 	import { getUnits } from "$lib/units";
     import { weatherData } from "../../stores/weather";
 	import CountryEmoji from "../CountryEmoji/CountryEmoji.svelte";
+	import DefaultCityButton from "../DefaultCityButton/DefaultCityButton.svelte";
 	import DetailedWeatherData from "../DetailedWeatherData/DetailedWeatherData.svelte";
 	import Forecast from "../Forecast/Forecast.svelte";
 	import PhotoAttribution from "../PhotoAttribution/PhotoAttribution.svelte";
 	import SaveCityButton from "../SaveCityButton/SaveCityButton.svelte";
-	import SetDefaultModal from "../SetDefaultModal/SetDefaultModal.svelte";
 	import UnitSwitcher from "../UnitSwitcher/UnitSwitcher.svelte";
 
     $: weather = $weatherData?.current.weather.toLowerCase();
@@ -27,7 +27,7 @@
                 <h2>{$weatherData.current.temp} {getUnits($weatherData.units, "temp")}</h2>
                 <!-- svelte-ignore a11y-missing-content -->
                 <h2></h2>
-            </hgroup> 
+            </hgroup>
         </header>
             
         <section>  
@@ -67,6 +67,7 @@
     .hero {
         background-size: cover;
         background-position: center;
+        position: relative;
     }
 
     .clear {

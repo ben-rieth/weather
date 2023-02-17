@@ -1,15 +1,14 @@
 <script lang='ts'>
     import { slide } from 'svelte/transition';
-	import { defaultCityModalOpen, savedCities } from "../../stores/weather";
+	import { savedCities } from "../../stores/weather";
 	import type { City } from "../../types/Geo";
+	import DefaultCityButton from '../DefaultCityButton/DefaultCityButton.svelte';
 
     export let city : City;
 
     const addCity = () => {
         $savedCities = [...$savedCities, city];
         localStorage.setItem('saved', JSON.stringify($savedCities));
-        
-        // $defaultCityModalOpen = true;
     }
 
     const removeCity = () => {
@@ -23,5 +22,6 @@
 {#if !cityIsSaved}
     <button on:click={addCity} transition:slide|local>Save City</button>
 {:else}
+    <DefaultCityButton city={city} />
     <button on:click={removeCity} transition:slide|local class="outline">Remove From Saved Cities</button>
 {/if}
