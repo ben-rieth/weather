@@ -33,7 +33,7 @@
         <h3>Search Location</h3>
     </header>
     <form on:submit|preventDefault={searchLocation}>
-        <input type='text' name='city' bind:value={city} placeholder='City*' />
+        <input type='text' name='city' bind:value={city} placeholder='City*' required />
         <input type='text' name='country' bind:value={country} placeholder='Country'/>
         <button type='submit'>Submit</button>
     </form>
