@@ -38,12 +38,6 @@
             getPositionFailure,
         );
     }
-
-    onMount(async () => {
-        if (localStorage.getItem('getAtLocationOnStart') === 'true') {
-            userLocation();
-        }
-    })
 </script>
 
 <button on:click={userLocation}>Search At Your Location</button>

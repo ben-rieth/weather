@@ -1,22 +1,12 @@
-<script>
-	import { onMount } from "svelte";
+<script lang='ts'>
+    let getAtLocationOnStartup = typeof window !== 'undefined' && localStorage.getItem('getAtLocationOnStartup') === 'true';
 
-
-    let getAtLocationOnStartup = false;
-
-    $: () => {
-        if (getAtLocationOnStartup) {
-            navigator.geolocation.getCurrentPosition(
+    $: getAtLocationOnStartup && navigator.geolocation.getCurrentPosition(
                 () => console.log('permission granted'),
                 () => console.log('permission not granted')
             );
-        }
-        localStorage.setItem('getAtLocationOnStartup', `${getAtLocationOnStartup}`);
-    }
-
-    onMount(() => {
-        getAtLocationOnStartup = localStorage.getItem('getAtLocationOnStartup') === 'true';
-    })
+    
+    $: typeof window !== 'undefined' && localStorage.setItem('getAtLocationOnStartup', `${getAtLocationOnStartup}`);
 </script>
 
 <article>
