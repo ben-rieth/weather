@@ -16,7 +16,8 @@
 
     <article>
         <header 
-            class={`hero ${weather}`}
+            class={`hero`}
+            style:background-image="url('/images/{weather}.jpg')"
         >
             <hgroup>
                 <h3>
@@ -67,61 +68,5 @@
         background-size: cover;
         background-position: center;
         position: relative;
-    }
-
-    .clear {
-        background-image: url('/images/clear.jpg');
-    }
-
-    .thunderstorm {
-        /* Johannes Plenio https://unsplash.com/@jplenio */
-        background-image: url('/images/thunderstorm.jpg');
-    }
-
-    .rain {
-        /* Valentin Müller https://unsplash.com/@wackeltin_meem */
-        background-image: url('/images/rain.jpg');
-    }
-
-    .drizzle {
-        background-image: url('/images/rain.jpg');
-    }
-
-    .snow {
-        /* Chandler Cruttenden https://unsplash.com/@chanphoto */
-        background-image: url('/images/snow.jpg')
-    }
-
-    .clouds {
-        /*  Joonas Sild https://unsplash.com/@joonas1233  */
-        background-image: url('images/cloudy.jpg')
-    }
-
-    .mist {
-        /* Dave Hoefler https://unsplash.com/@davehoefler */
-        background-image: url('images/mist.jpg')
-    }
-
-    .fog {
-        background-image: url('images/mist.jpg')
-    }
-
-    .haze {
-        /** Alex Gindin https://unsplash.com/@alexgindin */
-        background-image: url('images/haze.jpg');
-    }
-
-    .tornado {
-        /* Nikolas Noonan https://unsplash.com/@nikolasnoonan */
-        background-image: url('/images/tornado.jpg');
-    }
-
-    .smoke {
-        /* Malachi Brooks https://unsplash.com/@mebrooks01 */
-        background-image: url('/images/smoke.jpg');
-    }
-
-    .ash {
-        background-image: url('/images/smoke.jpg');
     }
 </style>
