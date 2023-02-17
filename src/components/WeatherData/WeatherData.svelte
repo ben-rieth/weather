@@ -20,11 +20,11 @@
             class={`hero ${weather}`}
         >
             <hgroup>
-                <h1>
+                <h3>
                     <span id="city">{$weatherData.city.city}{$weatherData.city.state && `, ${$weatherData.city.state}`}</span>
                     <CountryEmoji flag={$weatherData.city.countryFlag} size='md' />
-                </h1>
-                <h2>{$weatherData.current.temp} {getUnits($weatherData.units, "temp")}</h2>
+                </h3>
+                <h4>{$weatherData.current.temp} {getUnits($weatherData.units, "temp")}</h4>
                 <!-- svelte-ignore a11y-missing-content -->
                 <h2></h2>
             </hgroup>

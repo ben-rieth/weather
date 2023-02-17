@@ -22,6 +22,5 @@
 {#if !cityIsSaved}
     <button on:click={addCity} transition:slide|local>Save City</button>
 {:else}
-    <DefaultCityButton city={city} />
     <button on:click={removeCity} transition:slide|local class="outline">Remove From Saved Cities</button>
 {/if}

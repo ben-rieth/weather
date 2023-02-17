@@ -4,11 +4,11 @@
 
     export let city : City;
 
-    $: cityIsDefault = `${$defaultCity?.city}${$defaultCity?.state}${$defaultCity?.countryName}` ===`${city.city}${city.state}${city.countryName}`;
+    $: cityIsDefault = $defaultCity ? `${$defaultCity.city}${$defaultCity.state}${$defaultCity.countryName}` ===`${city.city}${city.state}${city.countryName}` : false;
 
     const setAsDefault = () => {
         $defaultCity = city;
-        localStorage.setItem('default', JSON.stringify(defaultCity));
+        localStorage.setItem('default', JSON.stringify($defaultCity));
     }
 </script>
 

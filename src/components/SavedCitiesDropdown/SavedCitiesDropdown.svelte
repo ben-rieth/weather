@@ -49,7 +49,9 @@
     };
 
     const isDefault = (city: City) => {
-        return `${$defaultCity?.city}${$defaultCity?.state}${$defaultCity?.countryName}` ===`${city.city}${city.state}${city.countryName}`;
+        if (!$defaultCity) return false;
+
+        return `${$defaultCity.city}${$defaultCity.state}${$defaultCity.countryName}` === `${city.city}${city.state}${city.countryName}`;
     }
 </script>
 
