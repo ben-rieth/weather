@@ -2,6 +2,7 @@
 	import { PUBLIC_URL } from "$env/static/public";
 	import axios from "axios";
     import { weatherStatus, weatherData } from "../../stores/weather";
+    import { onMount } from "svelte";
 
     const coordsEndpoint = `${PUBLIC_URL}/api/weather/coords`
 
@@ -34,6 +35,12 @@
             getPositionFailure,
         );
     }
+
+    onMount(async () => {
+        if (localStorage.getItem('getAtLocationOnStart') === 'true') {
+            userLocation();
+        }
+    })
 </script>
 
 <button on:click={userLocation}>Search At Your Location</button>

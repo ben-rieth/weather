@@ -2,7 +2,6 @@
 	import { getUnits } from "$lib/units";
     import { weatherData } from "../../stores/weather";
 	import CountryEmoji from "../CountryEmoji/CountryEmoji.svelte";
-	import DefaultCityButton from "../DefaultCityButton/DefaultCityButton.svelte";
 	import DetailedWeatherData from "../DetailedWeatherData/DetailedWeatherData.svelte";
 	import Forecast from "../Forecast/Forecast.svelte";
 	import PhotoAttribution from "../PhotoAttribution/PhotoAttribution.svelte";

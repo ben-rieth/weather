@@ -6,4 +6,3 @@ export const weatherData = writable<WeatherData | undefined>();
 export const weatherStatus = writable<'untouched' | 'loading' | 'error' | 'success'>('untouched');
 
 export const savedCities = writable<City[]>([]);
-export const defaultCity = writable<City | undefined>();

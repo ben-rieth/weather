@@ -1,5 +1,5 @@
 <script lang='ts'>
-    import { weatherData, weatherStatus, savedCities, defaultCity } from '../../stores/weather';
+    import { weatherData, weatherStatus, savedCities } from '../../stores/weather';
     import { onMount } from 'svelte';
     import axios from 'axios';
 	import type { City } from '../../types/Geo';
@@ -18,15 +18,7 @@
         const saved: City[] = JSON.parse(_storageData);
         $savedCities = saved;
 
-        const _default = localStorage.getItem('default');
-        if(!_default) {
-            await getWeather(saved[0]);
-            return;
-        }
-
-        const defaultCity : City = JSON.parse(_default);
-        await getWeather(defaultCity);
-        
+        await getWeather(saved[0]);
     });
 
     const getWeather = async (city: City) => {
@@ -48,11 +40,6 @@
         }
     };
 
-    const isDefault = (city: City) => {
-        if (!$defaultCity) return false;
-
-        return `${$defaultCity.city}${$defaultCity.state}${$defaultCity.countryName}` === `${city.city}${city.state}${city.countryName}`;
-    }
 </script>
 
 <details role="list">
@@ -65,10 +52,6 @@
                 >
                     {city.city}{city.state && `, ${city.state}`}
                     <CountryEmoji flag={city.countryFlag} size='sm' />
-
-                    {#if isDefault(city)} 
-                        <i class="bi bi-star-fill favorite" />
-                    {/if}
                 </a>
             </li>
         {/each}
@@ -78,10 +61,3 @@
         {/if}
     </ul>
 </details>
-
-<style>
-    .favorite {
-        color: #ffc107;
-        float: right;
-    }
-</style>

@@ -2,7 +2,6 @@
     import { slide } from 'svelte/transition';
 	import { savedCities } from "../../stores/weather";
 	import type { City } from "../../types/Geo";
-	import DefaultCityButton from '../DefaultCityButton/DefaultCityButton.svelte';
 
     export let city : City;
 

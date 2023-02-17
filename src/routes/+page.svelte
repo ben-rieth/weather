@@ -7,6 +7,7 @@
 	import NavBar from '../components/NavBar/NavBar.svelte';
 	import Footer from '../components/Footer/Footer.svelte';
 	import SavedCitiesDropdown from '../components/SavedCitiesDropdown/SavedCitiesDropdown.svelte';
+	import Settings from '../components/Settings/Settings.svelte';
 
 </script>
 
@@ -31,6 +32,8 @@
         <article>Weather could not be retrieved</article>
         <SearchForm />
     {/if}
+
+    <Settings />
 
     <Footer />
 </main>
