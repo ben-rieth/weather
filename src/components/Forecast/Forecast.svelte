@@ -78,3 +78,9 @@
         </figure>
     </details>
 {/if}
+
+<style>
+    td, th {
+        white-space: nowrap;
+    }
+</style>
