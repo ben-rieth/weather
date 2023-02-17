@@ -14,10 +14,11 @@
 
     onMount(async () => {
         if (localStorage.getItem('getAtLocationOnStartup') === 'true') {
-            $weatherStatus = 'loading';
 
             navigator.geolocation.getCurrentPosition(
                 async (pos) => {
+                    $weatherStatus = 'loading';
+
                     try {
                         const data = await axios.get(COORDS_ENDPOINT, {
                             params: {
@@ -42,7 +43,7 @@
 </script>
 
 <svelte:window 
-    on:beforeunload={() => window.scrollTo(0, 0)}
+    on:beforeunload={() => document.body.scrollTop = document.documentElement.scrollTop = 0}
 />
 
 <main class="container">
