@@ -3,8 +3,7 @@
     import { PUBLIC_URL } from "$env/static/public";
     import axios from "axios";
 	import UserLocationButton from "../UserLocationButton/UserLocationButton.svelte";
-
-    const searchEndpoint = `${PUBLIC_URL}/api/weather/search`;
+	import { SEARCH_ENDPOINT } from "$lib/constants/urls";
     
     let city = '';
     let country = '';
@@ -13,7 +12,7 @@
         document.body.scrollTop = document.documentElement.scrollTop = 0;
         $weatherStatus ='loading';
         try {
-            const result = await axios.get(searchEndpoint, {
+            const result = await axios.get(SEARCH_ENDPOINT, {
                 params: {
                     city,
                     country

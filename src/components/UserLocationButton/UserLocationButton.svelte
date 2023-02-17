@@ -1,17 +1,14 @@
 <script lang='ts'>
-	import { PUBLIC_URL } from "$env/static/public";
 	import axios from "axios";
     import { weatherStatus, weatherData } from "../../stores/weather";
-    import { onMount } from "svelte";
-
-    const coordsEndpoint = `${PUBLIC_URL}/api/weather/coords`
-
+	import { COORDS_ENDPOINT } from "$lib/constants/urls";
+    
     const getPositionSuccess : PositionCallback = async (pos) => {
         $weatherStatus = 'loading';
         document.body.scrollTop = document.documentElement.scrollTop = 0;
 
         try {
-            const data = await axios.get(coordsEndpoint, {
+            const data = await axios.get(COORDS_ENDPOINT, {
                 params: {
                     lat: pos.coords.latitude,
                     lon: pos.coords.longitude,
