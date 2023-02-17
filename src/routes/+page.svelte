@@ -41,6 +41,10 @@
     })
 </script>
 
+<svelte:window 
+    on:beforeunload={() => window.scrollTo(0, 0)}
+/>
+
 <main class="container">
     <NavBar />
 
