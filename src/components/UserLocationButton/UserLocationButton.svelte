@@ -7,6 +7,9 @@
     const coordsEndpoint = `${PUBLIC_URL}/api/weather/coords`
 
     const getPositionSuccess : PositionCallback = async (pos) => {
+        $weatherStatus = 'loading';
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
+
         try {
             const data = await axios.get(coordsEndpoint, {
                 params: {

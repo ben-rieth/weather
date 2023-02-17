@@ -10,6 +10,7 @@
     let country = '';
 
     const searchLocation = async () => {
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
         $weatherStatus ='loading';
         try {
             const result = await axios.get(searchEndpoint, {
