@@ -40,6 +40,7 @@
     <details open={open}>
         <summary>
             <i class={`bi ${gridIcon}`} />
+            &nbsp;
             {data.weekday}
             &nbsp;&nbsp;|&nbsp;&nbsp;
             {data.high}° &nbsp;{data.low}°
@@ -63,7 +64,7 @@
                     <tr>
                         <th scope="row"><i class="bi bi-thermometer" /></th>
                         {#each data.hourly as timestamp}
-                            <td>{timestamp.temp} {getUnits(units, "temp")}</td>
+                            <td>{timestamp.temp}{getUnits(units, "temp")}</td>
                         {/each}
                     </tr>
                     <tr>
