@@ -43,7 +43,7 @@
             &nbsp;
             {data.weekday}
             &nbsp;&nbsp;|&nbsp;&nbsp;
-            {data.high}° &nbsp;{data.low}°
+            {data.high}°&nbsp;/&nbsp;{data.low}°
         </summary>
 
         <figure>
