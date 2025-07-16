@@ -1,15 +1,14 @@
 import { getCityLocation } from "$lib/server/geo/cities";
 import { getWeatherDataByCoords } from "$lib/server/weather";
 import { getUnitsBasedOnCountry } from "$lib/units";
-import { json } from "@sveltejs/kit";
-import type { RequestEvent, RequestHandler } from "../$types";
+import { json, RequestEvent, RequestHandler } from "@sveltejs/kit";
 import { z } from 'zod';
 
 const schema = z.object({
     city: z.string({ required_error: 'City must be provided' }),
     country: z.string().optional(),
     units: z.enum(["imperial", "metric"]).optional(),
-}) 
+})
 
 export const GET: RequestHandler = async ({ url }: RequestEvent) => {
 
@@ -35,13 +34,13 @@ export const GET: RequestHandler = async ({ url }: RequestEvent) => {
         return new Response("Cannot get city data from server", { status: 500 });
     }
 
-    const units : 'imperial' | 'metric' = params.units ?? getUnitsBasedOnCountry(cityData.countryCode);
+    const units: 'imperial' | 'metric' = params.units ?? getUnitsBasedOnCountry(cityData.countryCode);
 
     try {
         const data = await getWeatherDataByCoords(
-            cityData.lat, 
+            cityData.lat,
             cityData.lon,
-            units, 
+            units,
             cityData.zone
         );
 
