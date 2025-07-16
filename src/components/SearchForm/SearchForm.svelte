@@ -1,5 +1,5 @@
 <script>
-	import { weatherData, weatherStatus } from '../../stores/weather';
+	import { weatherData, weatherError, weatherStatus } from '../../stores/weather';
 	import { PUBLIC_URL } from '$env/static/public';
 	import axios from 'axios';
 	import UserLocationButton from '../UserLocationButton/UserLocationButton.svelte';
@@ -20,9 +20,9 @@
 					}
 				})
 				.then((res) => res.data);
-			console.log(result);
 			$weatherData = result;
 			$weatherStatus = 'success';
+			$weatherError = '';
 		} catch (err) {
 			$weatherStatus = 'error';
 		}

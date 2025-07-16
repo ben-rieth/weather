@@ -1,6 +1,6 @@
 <script lang="ts">
 	import axios from 'axios';
-	import { weatherStatus, weatherData } from '../../stores/weather';
+	import { weatherStatus, weatherData, weatherError } from '../../stores/weather';
 	import { COORDS_ENDPOINT } from '$lib/constants/urls';
 
 	const getPositionSuccess: PositionCallback = async (pos) => {
@@ -20,13 +20,24 @@
 			$weatherData = data;
 
 			$weatherStatus = 'success';
+			$weatherError = '';
 		} catch (err) {
 			$weatherStatus = 'error';
 		}
 	};
 
-	const getPositionFailure: PositionErrorCallback = () => {
+	const getPositionFailure: PositionErrorCallback = (err) => {
 		$weatherStatus = 'error';
+		switch (err.code) {
+			case 1:
+				$weatherError = 'Failed to get location because permission is denied.';
+				break;
+			case 2:
+			case 3:
+			default:
+				$weatherError = 'Failed to get location';
+				break;
+		}
 	};
 
 	const userLocation = async () => {
