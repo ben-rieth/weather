@@ -10,7 +10,6 @@
 		className: 'flag',
 		base: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/'
 	});
-	console.log(flagHTML);
 	const flagSrc = flagHTML.split(' ')[4].slice(5, -3);
 </script>
 

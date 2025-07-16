@@ -1,7 +1,7 @@
 import { getCityLocation } from "$lib/server/geo/cities";
 import { getWeatherDataByCoords } from "$lib/server/weather";
 import { getUnitsBasedOnCountry } from "$lib/units";
-import { json, RequestEvent, RequestHandler } from "@sveltejs/kit";
+import { json, type RequestEvent, type RequestHandler } from "@sveltejs/kit";
 import { z } from 'zod';
 
 const schema = z.object({
