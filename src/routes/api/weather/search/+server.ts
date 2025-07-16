@@ -5,7 +5,7 @@ import { json, RequestEvent, RequestHandler } from "@sveltejs/kit";
 import { z } from 'zod';
 
 const schema = z.object({
-    city: z.string({ required_error: 'City must be provided' }),
+    city: z.string(),
     country: z.string().optional(),
     units: z.enum(["imperial", "metric"]).optional(),
 })
